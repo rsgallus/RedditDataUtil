@@ -4,8 +4,8 @@ import time
 import post
 
 # Constants
-minutes_between_new = 5
-new_posts_limit = 50
+minutes_between_new = 10
+new_posts_limit = 20
 
 # Initialize our bot
 user_agent = ("Analytics Bot 0.1")
@@ -39,8 +39,8 @@ while True:
         for current_post in tracked_posts:
             submission = r.get_submission(submission_id = current_post.id)
             current_post.addScore(submission.score)
-            #slope = current_post.calculateChange()
-            print "\nAverage slope for post ", current_post.title, "is ", current_post.calculateChange()
+            if(minutes == 1):
+                print "\nAverage slope for post ", current_post.title, "is ", current_post.calculateChange()
 
         print "\n Minutes remaining = ", minutes
         minutes = minutes - 1
