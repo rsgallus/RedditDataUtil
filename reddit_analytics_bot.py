@@ -3,6 +3,10 @@ import praw
 import time
 import post
 
+# Constants
+minutes_between_new = 5
+new_posts_limit = 50
+
 # Initialize our bot
 user_agent = ("Analytics Bot 0.1")
 r = praw.Reddit(user_agent = user_agent)
@@ -18,7 +22,7 @@ while True:
 
     # Grab any new posts
     print "\n ---------------------------------- \n Checking for new posts \n"
-    for submission in subreddit.get_new(limit = 10):
+    for submission in subreddit.get_new(limit = new_posts_limit):
 
         # Create a new post object
         new_post = post.Post(submission.title, submission.id)
@@ -28,7 +32,7 @@ while True:
             print "New Post: ", new_post.title
 
     # Track score changes for 5 minutes
-    minutes = 5
+    minutes = minutes_between_new
     while minutes > 0:
         print "\n\n Updating tracked posts"
 
