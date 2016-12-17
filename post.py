@@ -1,40 +1,33 @@
 #!/usr/bin/python
 
-class Post:
-    'Class for reddit posts'
-    postCount = 0
+import json
+
+
+class RedditPost:
 
     # Initialize post object
-    def __init__(self, title, id):
+    def __init__(self, title, post_id):
         self.title = title
-        self.id = id
-        self.scoreList = []
-        self.minuteList = []
-        self.minutes = 0
-        Post.postCount += 1
+        self.post_id = post_id
+        self.score_list = []
+        self.time_list = []
 
     # Add score to the list
-    def addScore(self, score):
-        self.scoreList.append(score)
-        self.minuteList.append(self.minutes)
-        self.minutes = self.minutes + 1
+    def add_score(self, score):
+        self.score_list.append(score)
+
+    # Add time to list
+    def add_time(self, time):
+        self.time_list.append(time)
 
     # Calculate change in scores
-    def calculateChange(self):
-        slope = []
-        sum = 0
+    def get_json(self):
 
-        # Calculate slope between each of the consecutive points
-        index = len(self.scoreList) - 1
-        while index > 0:
+        json_obj = {
+            'id': self.post_id,
+            'title': self.title,
+            'score_list': self.score_list,
+            'time_list': self.time_list
+        }
 
-            if self.scoreList[index - 1] != 0:
-                slope.append(self.scoreList[index] / self.scoreList[index-1])
-
-            index = index - 1
-
-        # Calculate average slope
-        for score in self.scoreList:
-            sum = sum + score
-
-        return sum/len(self.scoreList)
+        return json.dumps(json_obj, indent=2)
