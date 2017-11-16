@@ -1,7 +1,6 @@
 #!/usr/bin/python
 import praw
 import datetime
-import time
 import calendar
 import csv
 
@@ -56,7 +55,7 @@ def main():
         row.append(submission.author.name.encode('utf-8').strip())
 
         # Find serious tag
-        if submission.title.partition(' ')[0] == '[Serious]':
+        if submission.title.partition(' ')[0].lower() == '[serious]':
             row.append("yes")
         else:
             row.append("no")
