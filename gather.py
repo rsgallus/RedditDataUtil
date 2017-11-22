@@ -25,6 +25,7 @@ def main():
     # Append column headers
     if column_headers:
         headers = []
+        headers.append("id")
         headers.append("title")
         headers.append("username")
         headers.append("serious")
@@ -51,14 +52,15 @@ def main():
             print row_count, 'posts read'
 
         # Find basic post information
+        row.append(submission.id)
         row.append(submission.title.encode('utf-8').strip())
         row.append(submission.author.name.encode('utf-8').strip())
 
         # Find serious tag
         if submission.title.partition(' ')[0].lower() == '[serious]':
-            row.append("yes")
+            row.append(1)
         else:
-            row.append("no")
+            row.append(0)
 
         # Find time of day
         current_hour = datetime.datetime.now().hour
