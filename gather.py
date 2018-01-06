@@ -8,7 +8,7 @@ def main():
 
     # Config
     column_headers = True
-    post_limit = 100
+    post_limit = 200
 
     # Initialize our bot
     reddit = praw.Reddit(
@@ -66,15 +66,15 @@ def main():
         current_hour = datetime.datetime.now().hour
         if current_hour < 4:                            # midnight - 4am
             row.append("night")
-        elif current_hour > 4 and current_hour < 8:     # 4am - 8am
+        elif current_hour >= 4 and current_hour < 8:     # 4am - 8am
             row.append("early_morning")
-        elif current_hour > 8 and current_hour < 12:    # 8am - noon
+        elif current_hour >= 8 and current_hour < 12:    # 8am - noon
             row.append("morning")
-        elif current_hour > 12 and current_hour < 16:    # noon - 4pm
+        elif current_hour >= 12 and current_hour < 16:    # noon - 4pm
             row.append("afternoon")
-        elif current_hour > 16 and current_hour < 20:    # 4pm - 8pm
+        elif current_hour >= 16 and current_hour < 20:    # 4pm - 8pm
             row.append("early_evening")
-        elif current_hour > 20 and current_hour < 24:    # 8pm - midnight
+        elif current_hour >= 20 and current_hour < 24:    # 8pm - midnight
             row.append("evening")
 
         # Find day of week

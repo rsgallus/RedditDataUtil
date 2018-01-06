@@ -26,13 +26,15 @@ def main():
 
             # Append column header
             if row_count == 0:
+                row.append("final_score")
                 row.append("label")
 
             # Append label
             else:
                 submission = reddit.submission(id=row[0])
+                row.append(submission.score)
 
-                if int(submission.score) > 5000:
+                if int(submission.score) > 4000:
                     row.append(1)
                 else:
                     row.append(0)
