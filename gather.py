@@ -57,7 +57,7 @@ def main():
         row.append(submission.author.name.encode('utf-8').strip())
 
         # Find serious tag
-        if submission.title.partition(' ')[0].lower() == '[serious]':
+        if '[serious]' in submission.title.lower():
             row.append(1)
         else:
             row.append(0)
